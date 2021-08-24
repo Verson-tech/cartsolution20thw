@@ -1,16 +1,8 @@
 import React from "react"; 
-// import * as ReactBootstrap from 'react-bootstrap'
 import axios from 'axios';
-import {
-    Card,
-    Accordion,
-    Button,
-    Container,
-    Row,
-    Col,
-    Image,
-    // Input,
-  } from 'react-bootstrap';
+import * as ReactBootstrap from 'react-bootstrap'
+import { Card, Accordion, Button, Container, Row, Col, Image, Input } from
+'react-bootstrap';
 // sumulate getting products from DataBase
 const products = [
     { name: "Apples_:", country: "Italy", cost: 3, instock: 10 },
@@ -90,23 +82,12 @@ const products = [
   const Products = (props) => {
     const [items, setItems] = React.useState(products);
     const [cart, setCart] = React.useState([]);
-    // const [total, setTotal] = React.useState(0);
+    const [total, setTotal] = React.useState(0);
   
     //  Fetch Data
-
-// starter file
-// const { Fragment, useState, useEffect, useReducer } = React;
-// const [query, setQuery] = useState("http://localhost:1337/products");
-// const [{ data, isLoading, isError }, doFetch] = useDataApi(
-//   "http://localhost:1337/products",
-//   {
-//     data: [],
-//   }
-// );
-
-    const {  useState} = React;
+    const { Fragment, useState, useEffect, useReducer } = React;
     const [query, setQuery] = useState("http://localhost:1337/products");
-    const [{ data}, doFetch] = useDataApi(
+    const [{ data, isLoading, isError }, doFetch] = useDataApi(
       "http://localhost:1337/products",
       {
         data: [],
@@ -116,8 +97,8 @@ const products = [
     // Fetch Data
     const addToCart = (e) => {
       let name = e.target.name;
-      let item = items.filter((item) => item.name === name);
-      if (item[0].instock === 0) return;
+      let item = items.filter((item) => item.name == name);
+      if (item[0].instock == 0) return;
       item[0].instock = item[0].instock - 1;
       console.log(`add to Cart ${JSON.stringify(item)}`);
       setCart([...cart, ...item]);
@@ -125,16 +106,16 @@ const products = [
     const deleteCartItem = (delIndex) => {
       // this is the index in the cart not in the Product List
   
-      let newCart = cart.filter((item, i) => delIndex !== i);
-      let target = cart.filter((item, index) => delIndex === index);
+      let newCart = cart.filter((item, i) => delIndex != i);
+      let target = cart.filter((item, index) => delIndex == index);
       let newItems = items.map((item, index) => {
-        if (item.name === target[0].name) item.instock = item.instock + 1;
+        if (item.name == target[0].name) item.instock = item.instock + 1;
         return item;
       });
       setCart(newCart);
       setItems(newItems);
     };
-    // const photos = ["apple.png", "orange.png", "beans.png", "cabbage.png"];
+    const photos = ["apple.png", "orange.png", "beans.png", "cabbage.png"];
   
     let list = items.map((item, index) => {
       let n = index + 1049;
